@@ -14,11 +14,12 @@ def train_model():
     y_train = pd.read_csv(f"{PROCESSED_DATA_FOLDER}/y_train.csv")
 
     # Load the model hyperparameters
-    params = pickle.load(f"{MODEL_FOLDER}/rf_params.pkl")
+    with open(f"{MODEL_FOLDER}/rf_params.pkl", "rb") as f:
+        params = pickle.load(f)
     rf = RandomForestRegressor(**params)
     rf.fit(X_train_scaled, y_train)
-    params_filepath = f"{MODEL_FOLDER}/rf_regressor.pkl"
-    with open(params_filepath, "wb") as file:
+    model_filepath = f"{MODEL_FOLDER}/rf_regressor.pkl"
+    with open(model_filepath, "wb") as file:
         pickle.dump(rf, file)
 
 
