@@ -1,10 +1,12 @@
-from sklearn.preprocessing import train_test_split
+from sklearn.model_selection import train_test_split
 import pandas as pd
 from time import time
+import os
+from dotenv import load_dotenv
 
-DATA_FOLDER = "../../data"
-RAW_DATA_FOLDER = f"{DATA_FOLDER}/raw_data"
-PROCESSED_DATA_FOLDER = f"{DATA_FOLDER}/processed"
+load_dotenv()
+RAW_DATA_FOLDER = os.getenv("RAW_DATA_FOLDER")
+PROCESSED_DATA_FOLDER = os.getenv("PROCESSED_DATA_FOLDER")
 
 def split_dataset(input_dataset_filepath, output_data_path):
     df = pd.read_csv(input_dataset_filepath)

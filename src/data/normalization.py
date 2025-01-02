@@ -1,9 +1,11 @@
 from sklearn.preprocessing import StandardScaler
 import pandas as pd
 from time import time
+import os
+from dotenv import load_dotenv
 
-DATA_FOLDER = "../../data"
-PROCESSED_DATA_FOLDER = f"{DATA_FOLDER}/processed"
+load_dotenv()
+PROCESSED_DATA_FOLDER = os.getenv("PROCESSED_DATA_FOLDER")
 
 def scale_data(processed_data_path):
     X_train = pd.read_csv(f"{processed_data_path}/X_train.csv")

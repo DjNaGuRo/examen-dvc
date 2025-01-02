@@ -2,10 +2,12 @@ from sklearn.ensemble import RandomForestRegressor
 import pandas as pd
 import pickle
 import time
+import os
+from dotenv import load_dotenv
 
-DATA_FOLDER = "../../data"
-PROCESSED_DATA_FOLDER = f"{DATA_FOLDER}/processed"
-MODEL_FOLDER = "../../models"
+load_dotenv()
+PROCESSED_DATA_FOLDER = os.getenv("PROCESSED_DATA_FOLDER")
+MODEL_FOLDER = os.getenv("MODEL_FOLDER")
 
 def train_model():
     X_train_scaled = pd.read_csv(f"{PROCESSED_DATA_FOLDER}/X_train_scaled.csv")

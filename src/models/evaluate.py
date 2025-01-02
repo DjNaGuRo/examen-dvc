@@ -3,11 +3,14 @@ import pandas as pd
 import pickle
 import json
 import time
+import os
+from dotenv import load_dotenv
 
-DATA_FOLDER = "../../data"
-PROCESSED_DATA_FOLDER = f"{DATA_FOLDER}/processed"
-MODEL_FOLDER = "../../models"
-METRICS_FOLDER = "../../metrics"
+load_dotenv()
+PROCESSED_DATA_FOLDER = os.getenv("PROCESSED_DATA_FOLDER")
+MODEL_FOLDER = os.getenv("MODEL_FOLDER")
+METRICS_FOLDER = os.getenv("METRICS_FOLDER")
+PREDICTIONS_FOLDER = os.getenv("PREDICTIONS_FOLDER")
 
 def evaluate_model():
     X_test_scaled = pd.read_csv(f"{PROCESSED_DATA_FOLDER}/X_test_scaled.csv")
@@ -18,7 +21,7 @@ def evaluate_model():
     
     # Predictions
     y_pred = rf_regressor.predict(X_test_scaled)
-    pred_filepath = f"{DATA_FOLDER}/predictions/ped.csv"
+    pred_filepath = f"{PREDICTIONS_FOLDER}/ped.csv"
     pd.DataFrame({"predictions": y_pred}).to_csv(pred_filepath)
 
     # Scores evaluation
