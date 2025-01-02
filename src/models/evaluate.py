@@ -5,6 +5,7 @@ import json
 import time
 import os
 from dotenv import load_dotenv
+import numpy as np
 
 load_dotenv()
 PROCESSED_DATA_FOLDER = os.getenv("PROCESSED_DATA_FOLDER")
@@ -15,8 +16,9 @@ PREDICTIONS_FOLDER = os.getenv("PREDICTIONS_FOLDER")
 def evaluate_model():
     X_test_scaled = pd.read_csv(f"{PROCESSED_DATA_FOLDER}/X_test_scaled.csv")
     y_test = pd.read_csv(f"{PROCESSED_DATA_FOLDER}/y_test.csv")
-    print(f"Y_test:\n{y_test.head()}")
-    print(f"Y_test shape:\n{y_test.shape}")
+    y_test = np.ravel(y_test)
+    # print(f"Y_test:\n{y_test.head()}")
+    # print(f"Y_test shape:\n{y_test.shape}")
 
     # Load the model 
     with open(f"{MODEL_FOLDER}/rf_regressor.pkl", "rb") as f:
@@ -24,8 +26,8 @@ def evaluate_model():
     
     # Predictions
     y_pred = rf_regressor.predict(X_test_scaled)
-    print(f"Predictions:\n{y_pred[:5]}")
-    print(f"Y_pred shape: {y_pred.shape}")
+    # print(f"Predictions:\n{y_pred[:5]}")
+    # print(f"Y_pred shape: {y_pred.shape}")
     pred_filepath = f"{PREDICTIONS_FOLDER}/ped.csv"
     pd.DataFrame({"predictions": y_pred}).to_csv(pred_filepath, index=False)
 

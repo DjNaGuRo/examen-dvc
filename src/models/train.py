@@ -4,6 +4,7 @@ import pickle
 import time
 import os
 from dotenv import load_dotenv
+import numpy as np
 
 load_dotenv()
 PROCESSED_DATA_FOLDER = os.getenv("PROCESSED_DATA_FOLDER")
@@ -12,6 +13,7 @@ MODEL_FOLDER = os.getenv("MODEL_FOLDER")
 def train_model():
     X_train_scaled = pd.read_csv(f"{PROCESSED_DATA_FOLDER}/X_train_scaled.csv")
     y_train = pd.read_csv(f"{PROCESSED_DATA_FOLDER}/y_train.csv")
+    y_train = np.ravel(y_train)
 
     # Load the model hyperparameters
     with open(f"{MODEL_FOLDER}/rf_params.pkl", "rb") as f:

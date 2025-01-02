@@ -5,6 +5,7 @@ import pickle
 import time
 import os
 from dotenv import load_dotenv
+import numpy as np
 
 load_dotenv()
 PROCESSED_DATA_FOLDER = os.getenv("PROCESSED_DATA_FOLDER")
@@ -14,6 +15,8 @@ def search_best_hyperparams(estimator, param_grid, saving_path):
     search = GridSearchCV(estimator=estimator, param_grid=param_grid, n_jobs=-1)
     X_train_scaled = pd.read_csv(f"{PROCESSED_DATA_FOLDER}/X_train_scaled.csv")
     y_train = pd.read_csv(f"{PROCESSED_DATA_FOLDER}/y_train.csv")
+    y_train = np.ravel(y_train)
+    # print("Y_train shape: ", y_train.shape)
     search.fit(X_train_scaled, y_train)
     best_params = search.best_params_
     with open(saving_path, "wb") as file:
