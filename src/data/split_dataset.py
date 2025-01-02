@@ -16,10 +16,10 @@ def split_dataset(input_dataset_filepath, output_data_path):
     y = df["silica_concentrate"]
     X = df[column_names]
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-    X_train.to_csv(f"{output_data_path}/X_train.csv")
-    X_test.to_csv(f"{output_data_path}/X_test.csv")
-    y_train.to_csv(f"{output_data_path}/y_train.csv")
-    y_test.to_csv(f"{output_data_path}/y_test.csv")
+    X_train.to_csv(f"{output_data_path}/X_train.csv", index=False)
+    X_test.to_csv(f"{output_data_path}/X_test.csv", index=False)
+    y_train.to_csv(f"{output_data_path}/y_train.csv", index=False)
+    y_test.to_csv(f"{output_data_path}/y_test.csv", index=False)
 
 
 if __name__ == "__main__":
