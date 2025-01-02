@@ -17,7 +17,8 @@ def evaluate_model():
     y_test = pd.read_csv(f"{PROCESSED_DATA_FOLDER}/y_test.csv")
 
     # Load the model 
-    rf_regressor = pickle.load(f"{MODEL_FOLDER}/rf_regressor.pkl")
+    with open(f"{MODEL_FOLDER}/rf_regressor.pkl", "rb") as f:
+        rf_regressor = pickle.load(f)
     
     # Predictions
     y_pred = rf_regressor.predict(X_test_scaled)
