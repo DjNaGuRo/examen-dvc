@@ -28,7 +28,7 @@ def evaluate_model():
     y_pred = rf_regressor.predict(X_test_scaled)
     # print(f"Predictions:\n{y_pred[:5]}")
     # print(f"Y_pred shape: {y_pred.shape}")
-    pred_filepath = f"{PREDICTIONS_FOLDER}/ped.csv"
+    pred_filepath = f"{PREDICTIONS_FOLDER}/y_pred.csv"
     pd.DataFrame({"predictions": y_pred}).to_csv(pred_filepath, index=False)
 
     # Scores evaluation
@@ -36,7 +36,6 @@ def evaluate_model():
         "r2_score" : r2_score(y_true=y_test, y_pred=y_pred),
         "rmse" : root_mean_squared_error(y_test, y_pred),
         "mae" : mean_absolute_error(y_test, y_pred),
-        "roc_auc_score" : roc_auc_score(y_test, y_pred)
     }
     metrics_filepath = f"{METRICS_FOLDER}/scores.json"
     with open(metrics_filepath, "w") as file:

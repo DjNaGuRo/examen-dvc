@@ -1,0 +1,5 @@
+outs:
+- md5: 1f9ffa035e2cb5244a7bffe28a672cf7
+  size: 6723
+  hash: md5
+  path: y_pred.csv
