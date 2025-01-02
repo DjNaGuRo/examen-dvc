@@ -21,6 +21,8 @@ def train_model():
     rf = RandomForestRegressor(**params)
     rf.fit(X_train_scaled, y_train)
     model_filepath = f"{MODEL_FOLDER}/rf_regressor.pkl"
+
+    # Save the model trained
     with open(model_filepath, "wb") as file:
         pickle.dump(rf, file)
 

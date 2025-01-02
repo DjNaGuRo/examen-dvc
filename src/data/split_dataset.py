@@ -1,8 +1,11 @@
 from sklearn.model_selection import train_test_split
+from dotenv import load_dotenv
 import pandas as pd
 from time import time
 import os
-from dotenv import load_dotenv
+
+from utils.read_params import read_params
+
 
 load_dotenv()
 RAW_DATA_FOLDER = os.getenv("RAW_DATA_FOLDER")
@@ -15,7 +18,8 @@ def split_dataset(input_dataset_filepath, output_data_path):
     df = pd.read_csv(input_dataset_filepath)
     y = df["silica_concentrate"]
     X = df[column_names]
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+    split_params = read_params()["split"]
+    X_train, X_test, y_train, y_test = train_test_split(X, y, **split_params)
     X_train.to_csv(f"{output_data_path}/X_train.csv", index=False)
     X_test.to_csv(f"{output_data_path}/X_test.csv", index=False)
     y_train.to_csv(f"{output_data_path}/y_train.csv", index=False)

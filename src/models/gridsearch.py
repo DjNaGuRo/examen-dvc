@@ -1,11 +1,14 @@
 from sklearn.model_selection import GridSearchCV
 from sklearn.ensemble import RandomForestRegressor
+from dotenv import load_dotenv
 import pandas as pd
 import pickle
 import time
 import os
-from dotenv import load_dotenv
 import numpy as np
+
+
+from utils.read_params import read_params
 
 load_dotenv()
 PROCESSED_DATA_FOLDER = os.getenv("PROCESSED_DATA_FOLDER")
@@ -26,11 +29,7 @@ def search_best_hyperparams(estimator, param_grid, saving_path):
 if __name__ == "__main__":
     saving_path = f"{MODEL_FOLDER}/rf_params.pkl"
     estimator = RandomForestRegressor()
-    param_grid = {
-        "n_estimators": [10, 25, 50, 100, 200],
-        "criterion": ["squared_error", "absolute_error", "friedman_mse"],
-        "max_depth": [3, 6, None]
-    }
+    param_grid = read_params()["rf_params"]
     start = time.time()
     print("Starting model hyperparameters tuning with GridSearchCV ...")
     search_best_hyperparams(estimator, param_grid, saving_path)

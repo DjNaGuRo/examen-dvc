@@ -1,5 +1,0 @@
-outs:
-- md5: 18688bd6ae6b9590a6ba789c63664992
-  size: 26001383
-  hash: md5
-  path: rf_regressor.pkl
