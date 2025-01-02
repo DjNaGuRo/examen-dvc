@@ -8,6 +8,7 @@ load_dotenv()
 PROCESSED_DATA_FOLDER = os.getenv("PROCESSED_DATA_FOLDER")
 
 def scale_data(processed_data_path):
+    print(f"Processed data folder: {processed_data_path}")
     X_train = pd.read_csv(f"{processed_data_path}/X_train.csv")
     X_test = pd.read_csv(f"{processed_data_path}/X_test.csv")
     scaler = StandardScaler()
